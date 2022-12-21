@@ -28,8 +28,6 @@ let notes = [
     }
 ]
 
-
-
 // const app = http.createServer((request, response) => {
 //     response.writeHead(200, {'Content-Type': 'text/plain'})
 //     response.end("Hi my little friend")
@@ -40,8 +38,14 @@ app.get('/', (request, response)=>{
     response.send('<h1>hola amigos<h1>')
 })
 
-app.get('/api', (request, response) => {
+app.get('/api/notas', (request, response) => {
     response.json(notes)
+})
+
+app.get('/api/notas/:id', (request, response) => {
+    const id = request.params.id
+    const notas = notes.find(notas => notas.id == id)
+    response.json(notas)
 })
 
 const PORT = 3001
